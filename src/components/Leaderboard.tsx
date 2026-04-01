@@ -1,6 +1,7 @@
 "use client";
 
 import { useLeaderboard } from "@/lib/hooks";
+import PlayerAvatar from "./PlayerAvatar";
 
 const RANK_STYLES = [
   "text-3xl font-bold text-gold",
@@ -50,9 +51,12 @@ export default function Leaderboard() {
           </div>
 
           {/* Avatar */}
-          <div className="w-12 h-12 rounded-full bg-warm flex items-center justify-center text-2xl flex-shrink-0">
-            {entry.player.avatar_emoji}
-          </div>
+          <PlayerAvatar
+            name={entry.player.name}
+            photoUrl={entry.player.photo_url}
+            emoji={entry.player.avatar_emoji}
+            size={i === 0 ? "lg" : "md"}
+          />
 
           {/* Name + count */}
           <div className="flex-1 min-w-0">

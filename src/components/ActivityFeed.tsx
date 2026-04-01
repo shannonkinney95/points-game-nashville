@@ -1,6 +1,7 @@
 "use client";
 
 import { useSubmissions } from "@/lib/hooks";
+import PlayerAvatar from "./PlayerAvatar";
 
 function timeAgo(dateStr: string): string {
   const now = new Date();
@@ -41,9 +42,12 @@ export default function ActivityFeed() {
           key={sub.id}
           className="card flex items-center gap-3 py-3 animate-fadeIn"
         >
-          <span className="text-xl flex-shrink-0">
-            {sub.players?.avatar_emoji || "👤"}
-          </span>
+          <PlayerAvatar
+            name={sub.players?.name || ""}
+            photoUrl={sub.players?.photo_url || null}
+            emoji={sub.players?.avatar_emoji || "👤"}
+            size="sm"
+          />
           <div className="flex-1 min-w-0">
             <p className="font-body text-sm text-text">
               <span className="font-semibold">{sub.players?.name}</span>{" "}

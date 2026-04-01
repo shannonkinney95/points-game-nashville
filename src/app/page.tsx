@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import Leaderboard from "@/components/Leaderboard";
 import SubmitAction from "@/components/SubmitAction";
 import ActivityFeed from "@/components/ActivityFeed";
@@ -77,11 +78,13 @@ export default function Home() {
           </h2>
         </div>
 
-        {activeTab === "leaderboard" && <Leaderboard />}
-        {activeTab === "submit" && <SubmitAction />}
-        {activeTab === "feed" && <ActivityFeed />}
-        {activeTab === "players" && <ManagePlayers />}
-        {activeTab === "actions" && <ManageActions />}
+        <ErrorBoundary>
+          {activeTab === "leaderboard" && <Leaderboard />}
+          {activeTab === "submit" && <SubmitAction />}
+          {activeTab === "feed" && <ActivityFeed />}
+          {activeTab === "players" && <ManagePlayers />}
+          {activeTab === "actions" && <ManageActions />}
+        </ErrorBoundary>
       </main>
 
       {/* Footer */}

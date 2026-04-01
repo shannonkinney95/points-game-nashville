@@ -6,6 +6,7 @@ create table players (
   id uuid default gen_random_uuid() primary key,
   name text not null,
   avatar_emoji text default '🤠',
+  photo_url text,
   created_at timestamptz default now()
 );
 

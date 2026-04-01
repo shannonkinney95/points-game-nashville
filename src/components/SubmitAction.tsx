@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { usePlayers, useActions } from "@/lib/hooks";
+import PlayerAvatar from "./PlayerAvatar";
 
 export default function SubmitAction() {
   const { players, loading: playersLoading } = usePlayers();
@@ -72,7 +73,12 @@ export default function SubmitAction() {
                   : ""
               }`}
             >
-              <span className="text-xl">{player.avatar_emoji}</span>
+              <PlayerAvatar
+                name={player.name}
+                photoUrl={player.photo_url}
+                emoji={player.avatar_emoji}
+                size="sm"
+              />
               <span className="font-display text-base truncate">
                 {player.name}
               </span>

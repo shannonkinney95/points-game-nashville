@@ -9,6 +9,7 @@ export type Player = {
   id: string;
   name: string;
   avatar_emoji: string;
+  photo_url: string | null;
   created_at: string;
 };
 
@@ -30,7 +31,7 @@ export type Submission = {
 };
 
 export type SubmissionWithDetails = Submission & {
-  players: Pick<Player, "name" | "avatar_emoji">;
+  players: Pick<Player, "name" | "avatar_emoji" | "photo_url">;
   actions: Pick<Action, "name" | "points" | "emoji">;
 };
 

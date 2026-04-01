@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { usePlayers } from "@/lib/hooks";
+import PlayerAvatar from "./PlayerAvatar";
+import SyncPlayers from "./SyncPlayers";
 
 const EMOJI_OPTIONS = [
   "🤠", "👸", "💃", "🦋", "🌸", "🔥", "✨", "💅",
@@ -10,7 +12,7 @@ const EMOJI_OPTIONS = [
 ];
 
 export default function ManagePlayers() {
-  const { players, loading } = usePlayers();
+  const { players, loading, refetch } = usePlayers();
   const [name, setName] = useState("");
   const [emoji, setEmoji] = useState("🤠");
   const [adding, setAdding] = useState(false);
@@ -45,6 +47,9 @@ export default function ManagePlayers() {
 
   return (
     <div className="space-y-6">
+      {/* Sync from RSVP sheet */}
+      <SyncPlayers onSync={refetch} />
+
       {/* Add player form */}
       <form onSubmit={handleAdd} className="card space-y-4">
         <h3 className="font-display text-xl text-text">Add a Player</h3>
@@ -98,7 +103,11 @@ export default function ManagePlayers() {
                 key={player.id}
                 className="card flex items-center gap-3 py-3"
               >
-                <span className="text-2xl">{player.avatar_emoji}</span>
+                <PlayerAvatar
+                  name={player.name}
+                  photoUrl={player.photo_url}
+                  emoji={player.avatar_emoji}
+                />
                 <span className="font-display text-lg text-text flex-1">
                   {player.name}
                 </span>
