@@ -1,6 +1,7 @@
 "use client";
 
 import { useSubmissions } from "@/lib/hooks";
+import { supabase } from "@/lib/supabase";
 import PlayerAvatar from "./PlayerAvatar";
 
 function timeAgo(dateStr: string): string {
@@ -15,7 +16,14 @@ function timeAgo(dateStr: string): string {
 }
 
 export default function ActivityFeed() {
-  const { submissions, loading } = useSubmissions();
+  const { submissions, loading, refetch } = useSubmissions();
+
+  const handleRemove = async (id: string, playerName: string, points: number) => {
+    if (!confirm(`Remove this action? This will take ${points} coins away from ${playerName}.`))
+      return;
+    await supabase.from("submissions").delete().eq("id", id);
+    refetch();
+  };
 
   if (loading) {
     return (
@@ -68,9 +76,23 @@ export default function ActivityFeed() {
               </p>
             )}
           </div>
-          <span className="text-[10px] sm:text-xs text-text-light flex-shrink-0 font-body mt-0.5 sm:mt-0">
-            {timeAgo(sub.created_at)}
-          </span>
+          <div className="flex flex-col items-end gap-1 flex-shrink-0 mt-0.5 sm:mt-0">
+            <span className="text-[10px] sm:text-xs text-text-light font-body">
+              {timeAgo(sub.created_at)}
+            </span>
+            <button
+              onClick={() =>
+                handleRemove(
+                  sub.id,
+                  sub.players?.name || "this player",
+                  sub.actions?.points || 0
+                )
+              }
+              className="text-[10px] sm:text-xs text-text-light/50 hover:text-red-500 transition-colors font-body"
+            >
+              Remove
+            </button>
+          </div>
         </div>
       ))}
     </div>
