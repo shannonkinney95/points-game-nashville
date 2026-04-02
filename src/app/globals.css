@@ -30,12 +30,14 @@
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body), -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
 /* Font utility classes */
@@ -56,8 +58,14 @@ body {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border-light);
   border-radius: 12px;
-  padding: 16px 20px;
+  padding: 14px 16px;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 16px 20px;
+  }
 }
 
 .card:hover {
@@ -77,19 +85,31 @@ body {
   box-shadow: 0 2px 12px rgba(201, 169, 110, 0.1);
 }
 
-/* Form inputs */
+/* Ensure touch targets are at least 44px */
+.card-interactive {
+  min-height: 44px;
+}
+
+/* Form inputs — 16px on mobile prevents iOS zoom */
 .form-input {
   display: block;
   width: 100%;
-  padding: 10px 14px;
+  padding: 12px 14px;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   font-family: var(--font-body), sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--color-text);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
   outline: none;
+}
+
+@media (min-width: 640px) {
+  .form-input {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
 }
 
 .form-input::placeholder {
@@ -127,11 +147,11 @@ select.form-input {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 28px;
+  padding: 14px 28px;
   background: var(--color-gold);
   color: white;
   font-family: var(--font-body), sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -139,12 +159,26 @@ select.form-input {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
+  min-height: 48px;
+}
+
+@media (min-width: 640px) {
+  .btn-primary {
+    padding: 12px 28px;
+    font-size: 13px;
+    min-height: auto;
+  }
 }
 
 .btn-primary:hover:not(:disabled) {
   background: #b8963d;
   box-shadow: 0 4px 16px rgba(201, 169, 110, 0.3);
   transform: translateY(-1px);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(201, 169, 110, 0.2);
 }
 
 .btn-primary:disabled {

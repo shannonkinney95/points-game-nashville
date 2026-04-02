@@ -86,7 +86,7 @@ export default function ManagePlayers() {
           />
         </div>
 
-        <button type="submit" disabled={adding || !name.trim()} className="btn-primary">
+        <button type="submit" disabled={adding || !name.trim()} className="btn-primary w-full sm:w-auto">
           {adding ? "Adding..." : "Add Player"}
         </button>
       </form>

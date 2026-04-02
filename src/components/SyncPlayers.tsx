@@ -82,7 +82,7 @@ export default function SyncPlayers({ onSync }: { onSync?: () => void }) {
 
   return (
     <div className="card space-y-3">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between">
         <div>
           <h3 className="font-display text-xl text-text">
             Sync from RSVP Sheet
@@ -94,7 +94,7 @@ export default function SyncPlayers({ onSync }: { onSync?: () => void }) {
         <button
           onClick={handleSync}
           disabled={syncing}
-          className="btn-primary flex-shrink-0"
+          className="btn-primary flex-shrink-0 w-full sm:w-auto"
         >
           {syncing ? "Syncing..." : "Sync Now"}
         </button>

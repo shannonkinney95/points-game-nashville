@@ -31,29 +31,29 @@ export default function Home() {
             Nashville &middot; July 2026
           </p>
           <h1 className="font-accent text-5xl sm:text-6xl text-white mb-2">
-            Points Game
+            Mini Economy
           </h1>
-          <p className="font-display text-xl text-white/60 italic">
-            May the best girl win
+          <p className="font-display text-lg sm:text-xl text-white/60 italic max-w-md mx-auto">
+            Collect the most coins in our own little economy &mdash; you need the most money to win
           </p>
         </div>
       </header>
 
       {/* Tab navigation */}
       <nav className="sticky top-0 z-40 bg-bg/90 backdrop-blur-md border-b border-border">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="flex overflow-x-auto no-scrollbar">
+        <div className="max-w-3xl mx-auto px-2 sm:px-4">
+          <div className="flex justify-between sm:justify-start overflow-x-auto no-scrollbar">
             {TABS.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-1.5 px-4 py-3 text-sm font-body whitespace-nowrap transition-all border-b-2 ${
+                className={`flex flex-col sm:flex-row items-center gap-0.5 sm:gap-1.5 px-2 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-body whitespace-nowrap transition-all border-b-2 flex-1 sm:flex-none min-h-[48px] sm:min-h-0 ${
                   activeTab === tab.id
                     ? "border-gold text-gold"
                     : "border-transparent text-text-light hover:text-text-mid"
                 }`}
               >
-                <span className="text-base">{tab.emoji}</span>
+                <span className="text-lg sm:text-base">{tab.emoji}</span>
                 <span>{tab.label}</span>
               </button>
             ))}
@@ -62,7 +62,7 @@ export default function Home() {
       </nav>
 
       {/* Content */}
-      <main className="max-w-2xl mx-auto px-4 py-8">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Section header */}
         <div className="mb-6">
           <p className="text-gold/60 font-body text-[11px] uppercase tracking-[0.2em]">
@@ -89,7 +89,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="text-center py-8 border-t border-border">
-        <p className="font-accent text-lg text-text-light">Points Game</p>
+        <p className="font-accent text-lg text-text-light">Mini Economy</p>
         <p className="text-xs text-text-light/60 font-body mt-1">
           Nashville &middot; July 2026
         </p>

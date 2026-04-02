@@ -104,7 +104,7 @@ export default function ManageActions() {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="section-label">Points</label>
             <input
@@ -133,7 +133,7 @@ export default function ManageActions() {
           </div>
         </div>
 
-        <button type="submit" disabled={adding || !name.trim()} className="btn-primary">
+        <button type="submit" disabled={adding || !name.trim()} className="btn-primary w-full sm:w-auto">
           {adding ? "Adding..." : "Add Action"}
         </button>
       </form>

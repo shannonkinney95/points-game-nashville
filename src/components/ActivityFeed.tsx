@@ -40,16 +40,18 @@ export default function ActivityFeed() {
       {submissions.map((sub) => (
         <div
           key={sub.id}
-          className="card flex items-center gap-3 py-3 animate-fadeIn"
+          className="card flex items-start sm:items-center gap-2.5 sm:gap-3 py-3 animate-fadeIn"
         >
-          <PlayerAvatar
-            name={sub.players?.name || ""}
-            photoUrl={sub.players?.photo_url || null}
-            emoji={sub.players?.avatar_emoji || "👤"}
-            size="sm"
-          />
+          <div className="mt-0.5 sm:mt-0">
+            <PlayerAvatar
+              name={sub.players?.name || ""}
+              photoUrl={sub.players?.photo_url || null}
+              emoji={sub.players?.avatar_emoji || "👤"}
+              size="sm"
+            />
+          </div>
           <div className="flex-1 min-w-0">
-            <p className="font-body text-sm text-text">
+            <p className="font-body text-xs sm:text-sm text-text leading-relaxed">
               <span className="font-semibold">{sub.players?.name}</span>{" "}
               <span className="text-text-mid">earned</span>{" "}
               <span className="text-gold font-semibold">
@@ -61,12 +63,12 @@ export default function ActivityFeed() {
               </span>
             </p>
             {sub.note && (
-              <p className="text-xs text-text-light mt-0.5 italic">
+              <p className="text-[11px] sm:text-xs text-text-light mt-0.5 italic">
                 &ldquo;{sub.note}&rdquo;
               </p>
             )}
           </div>
-          <span className="text-xs text-text-light flex-shrink-0 font-body">
+          <span className="text-[10px] sm:text-xs text-text-light flex-shrink-0 font-body mt-0.5 sm:mt-0">
             {timeAgo(sub.created_at)}
           </span>
         </div>

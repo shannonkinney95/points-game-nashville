@@ -20,8 +20,8 @@ const italiana = Italiana({
 });
 
 export const metadata: Metadata = {
-  title: "Points Game — Nashville",
-  description: "Track points and compete with the girls this weekend in Nashville",
+  title: "Mini Economy — Nashville",
+  description: "Collect the most coins in our own little economy — you need the most money to win",
 };
 
 export default function RootLayout({

@@ -35,12 +35,12 @@ export default function Leaderboard() {
       {leaderboard.map((entry, i) => (
         <div
           key={entry.player.id}
-          className={`card flex items-center gap-4 transition-all hover:scale-[1.01] ${
+          className={`card flex items-center gap-2.5 sm:gap-4 transition-all hover:scale-[1.01] ${
             i === 0 ? "ring-2 ring-gold/40 bg-gold/5" : ""
           }`}
         >
           {/* Rank */}
-          <div className="w-10 text-center">
+          <div className="w-7 sm:w-10 text-center flex-shrink-0">
             {i < 3 ? (
               <span className={RANK_STYLES[i]}>{i + 1}</span>
             ) : (
@@ -60,10 +60,10 @@ export default function Leaderboard() {
 
           {/* Name + count */}
           <div className="flex-1 min-w-0">
-            <p className="font-display text-xl text-text truncate">
+            <p className="font-display text-lg sm:text-xl text-text truncate">
               {entry.player.name}
             </p>
-            <p className="text-sm text-text-light font-body">
+            <p className="text-xs sm:text-sm text-text-light font-body">
               {entry.submission_count}{" "}
               {entry.submission_count === 1 ? "action" : "actions"}
             </p>
@@ -71,11 +71,11 @@ export default function Leaderboard() {
 
           {/* Points */}
           <div className="text-right flex-shrink-0">
-            <p className="font-display text-2xl text-gold">
+            <p className="font-display text-xl sm:text-2xl text-gold">
               {entry.total_points}
             </p>
-            <p className="text-xs text-text-light font-body uppercase tracking-wider">
-              pts
+            <p className="text-[10px] sm:text-xs text-text-light font-body uppercase tracking-wider">
+              coins
             </p>
           </div>
         </div>

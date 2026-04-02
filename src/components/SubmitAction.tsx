@@ -61,7 +61,7 @@ export default function SubmitAction() {
       {/* Player selection */}
       <div>
         <label className="section-label">Who did it?</label>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mt-2">
           {players.map((player) => (
             <button
               key={player.id}
@@ -96,7 +96,7 @@ export default function SubmitAction() {
               <h4 className="text-xs uppercase tracking-[0.15em] text-text-light font-body mb-2">
                 {category}
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {actions
                   .filter((a) => a.category === category)
                   .map((action) => (
@@ -151,15 +151,15 @@ export default function SubmitAction() {
             {submitting
               ? "Submitting..."
               : success
-              ? "✓ Points Added!"
-              : `Submit +${selectedActionData?.points || 0} pts`}
+              ? "✓ Coins Added!"
+              : `Submit +${selectedActionData?.points || 0} coins`}
           </button>
         </div>
       )}
 
       {success && (
         <div className="text-center animate-fadeIn">
-          <p className="text-olive font-display text-xl">Points recorded!</p>
+          <p className="text-olive font-display text-xl">Coins collected!</p>
         </div>
       )}
     </form>
