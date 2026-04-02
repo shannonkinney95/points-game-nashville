@@ -2,6 +2,7 @@ const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/1WbChy0qZD6sQmIip-aoP7RwtClz8Zs2Ft4PX27z2KMA/gviz/tq?tqx=out:csv";
 
 const FLICKR_USER_ID = "194580811@N08";
+const FLICKR_SET_ID = "72177720332858718";
 
 export type SheetPlayer = {
   name: string;
@@ -79,23 +80,30 @@ export async function fetchSheetPlayers(): Promise<SheetPlayer[]> {
 }
 
 export async function fetchFlickrPhotos(): Promise<FlickrPhoto[]> {
-  try {
-    const resp = await fetch(
-      `https://api.flickr.com/services/feeds/photos_public.gne?id=${FLICKR_USER_ID}&format=json&nojsoncallback=1`
-    );
-    if (!resp.ok) return [];
-    const data = await resp.json();
-    if (!data || !data.items) return [];
-    return data.items.map(
-      (item: { title: string; media: { m: string } }) => ({
-        title: item.title,
-        // Swap _m (240px) for _w (400px) for better quality
-        url: item.media.m.replace("_m.jpg", "_w.jpg"),
-      })
-    );
-  } catch {
-    return [];
+  // Try album feed first (more reliable), fall back to public feed
+  const urls = [
+    `https://api.flickr.com/services/feeds/photoset.gne?set=${FLICKR_SET_ID}&nsid=${FLICKR_USER_ID}&format=json&nojsoncallback=1`,
+    `https://api.flickr.com/services/feeds/photos_public.gne?id=${FLICKR_USER_ID}&format=json&nojsoncallback=1`,
+  ];
+
+  for (const url of urls) {
+    try {
+      const resp = await fetch(url);
+      if (!resp.ok) continue;
+      const data = await resp.json();
+      if (!data || !data.items || data.items.length === 0) continue;
+      return data.items.map(
+        (item: { title: string; media: { m: string } }) => ({
+          title: item.title,
+          // Swap _m (240px) for _w (400px) for better quality
+          url: item.media.m.replace("_m.jpg", "_w.jpg"),
+        })
+      );
+    } catch {
+      continue;
+    }
   }
+  return [];
 }
 
 /**
